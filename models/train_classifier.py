@@ -9,7 +9,7 @@ from nltk import pos_tag, ne_chunk
 from nltk.stem import WordNetLemmatizer
 
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
 
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
@@ -84,19 +84,17 @@ def build_model():
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(RandomForestClassifier()))
+        ('clf', MultiOutputClassifier(AdaBoostClassifier()))
     ])
 
-    # parameters = {
-    #         # 'tfidf_smooth':[True, False]
-    #         # 'clf_estimator_estimator_C':[1,2,5]
-    #         'clf__estimator__n_estimators': [10, 50, 100]
-    #         # 'clf__estimator__learning_rate': [0.1, 1, 5],
-    #             }
-    #
-    # cv = GridSearchCV(pipeline, param_grid=parameters)
+    parameters = {
+                    'clf__estimator__n_estimators': [50, 100, 150],
+                    'clf__estimator__learning_rate': [0.1, 1, 10]
+                }
+    
+    cv = GridSearchCV(pipeline, param_grid=parameters)
 
-    return pipeline
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -104,9 +102,6 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Y_pred = model.predict(X_test)
 
     print(classification_report(Y_test, Y_pred, target_names = category_names))
-    # print('---------------------------------')
-    # for i in range(Y_test.shape[1]):
-    #     print('%25s accuracy : %.2f' %(category_names[i], accuracy_score(Y_test[:,i], Y_pred[:,i])))
 
 
 def save_model(model, model_filepath):

@@ -1,7 +1,6 @@
 import sys
 import pandas as pd
 import numpy as np
-import sqlite3
 from sqlalchemy import create_engine
 
 
@@ -20,39 +19,26 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
 
-    # categories = df['categories'].str.split(pat=';',expand=True)
-    #
-    # row = categories.iloc[0]
-    #
-    # category_colnames = row.apply(lambda x: x[0:-2])
-    #
-    # categories.columns = category_colnames
-    #
-    # for column in categories:
-    #
-    #   categories[column] = categories[column].apply(lambda x: x[-1:])
-    #
-    #   categories[column] = categories[column].astype(str)
-    #   categories[column] = categories[column].astype(float)
-    #
-    # df.drop(['categories'],axis=1,inplace=True)
-    #
-    # df = pd.concat([df, categories],axis=1)
-    #
-    # df = df.drop_duplicates()
-
-
-    categories = df.categories.str.split(';', expand = True)
-    row = categories.loc[0]
-    category_colnames = row.apply(lambda x: x[:-2]).values.tolist()
+    categories = df['categories'].str.split(pat=';',expand=True)
+    
+    row = categories.iloc[0]
+    
+    category_colnames = row.apply(lambda x: x[0:-2])
+    
     categories.columns = category_colnames
+
     categories.related.loc[categories.related == 'related-2'] = 'related-1'
+    
     for column in categories:
-        categories[column] = categories[column].astype(str).str[-1]
-        categories[column] = pd.to_numeric(categories[column])
-    df.drop('categories', axis = 1, inplace = True)
-    df = pd.concat([df, categories], axis = 1)
-    df.drop_duplicates(subset = 'id', inplace = True)
+    
+      categories[column] = categories[column].apply(lambda x: x[-1:])
+      categories[column] = pd.to_numeric(categories[column])
+    
+    df.drop(['categories'],axis=1,inplace=True)
+    
+    df = pd.concat([df, categories],axis=1)
+    
+    df = df.drop_duplicates()
 
 
     return df
@@ -61,9 +47,8 @@ def clean_data(df):
 def save_data(df, database_filename):
 
     engine = create_engine('sqlite:///' + database_filename)
-    df.to_sql('Message', engine, if_exists='replace', index=False)
 
-    pass
+    df.to_sql('Message', engine, index=False)
 
 
 def main():
@@ -86,7 +71,6 @@ def main():
 
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
 
-        # print(df.head())
         save_data(df, database_filepath)
 
         print('Cleaned data saved to database!')
