@@ -1,6 +1,6 @@
 # Disaster Response Pipeline Project
 
-This project is about analyzing the the message from different resources.
+This project is about analyzing the the message for disaster reponse.
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
