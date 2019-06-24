@@ -34,6 +34,12 @@ nltk.download('maxent_ne_chunker')
 
 
 def load_data(database_filepath):
+    
+    '''
+
+    Connect to the database, then retrieve the data from database
+
+    '''
 
     # load data from database
     engine = create_engine('sqlite:///'+database_filepath)
@@ -60,6 +66,12 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    
+    '''
+    
+    Convert the text into tokens for NLP pipeline
+
+    '''
 
     text = text.lower()
 
@@ -80,6 +92,11 @@ def tokenize(text):
 
 
 def build_model():
+    
+    '''
+    Build pipeline for MultiOutputClassifier
+
+    '''
 
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -98,6 +115,11 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    
+    '''
+    Evaluate the model using classification_report
+
+    '''
 
     Y_pred = model.predict(X_test)
 
@@ -105,6 +127,11 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    
+    '''
+    Save the model to the classifier.pkl
+
+    '''
 
     joblib.dump(model,model_filepath)
 
