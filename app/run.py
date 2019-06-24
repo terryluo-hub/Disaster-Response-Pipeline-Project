@@ -54,9 +54,6 @@ def index():
     	category_counts.append(np.sum(df[each]))
 
 
-    # extract the data for 
-
-
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
