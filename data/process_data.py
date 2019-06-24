@@ -7,6 +7,12 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    
+    '''
+	Load message and categories file, then merge them into one dataframe
+
+	'''
+
 
     messages = pd.read_csv(messages_filepath)
 
@@ -18,6 +24,14 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    
+    '''
+	Convert the categorical columns into numerical columns, then use 
+	categorical value as column names. After that, convert the outliner, Finally, 
+	remove the duplicate.
+
+	'''
+
 
     categories = df['categories'].str.split(pat=';',expand=True)
     
@@ -45,6 +59,11 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    
+    '''
+	Save the data to the 'Message' table in sqlite database
+
+	'''
 
     engine = create_engine('sqlite:///' + database_filename)
 
