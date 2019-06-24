@@ -7,16 +7,22 @@
 3. Instruction
 
 
-#Installation:
+
+
+# Installation:
 
 
 
-#Summary:
+
+
+# Summary:
 
 This project is about analyzing the the message for disaster reponse.
 
 
-#Instruction:
+
+
+# Instruction:
 
 1. Run the following commands in the project's root directory to set up your database and model.
 
