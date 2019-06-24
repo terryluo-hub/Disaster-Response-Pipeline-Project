@@ -1,6 +1,7 @@
 import json
 import plotly
 import pandas as pd
+import numpy as np
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
@@ -39,9 +40,22 @@ model = joblib.load("../models/classifier.pkl")
 def index():
 
     # extract data needed for visuals
+
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    # extract the data for categories
+
+    category_counts = []
+    category = list(df.columns[4:])
+
+    for each in category:
+    	category_counts.append(np.sum(df[each]))
+
+
+    # extract the data for 
+
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -61,6 +75,24 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=category,
+                    y=category_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category"
                 }
             }
         }
