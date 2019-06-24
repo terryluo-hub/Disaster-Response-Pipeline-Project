@@ -27,16 +27,16 @@ Files:
 |- train_classifier.py 
 ```
 
-The following packages are required:
+### The following packages are required:
 
-json
-plotly
-pandas
-numpy
-sklearn
-sqlalchemy
-nltk
-flask
+- json
+- plotly
+- pandas
+- numpy
+- sklearn
+- sqlalchemy
+- nltk
+- flask
 
 # Summary:
 
