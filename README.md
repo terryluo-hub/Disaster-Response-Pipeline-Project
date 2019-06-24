@@ -40,13 +40,7 @@ Files:
 
 # Summary:
 
-This project is about analyzing the the message for disaster reponse.
-
-
-
-
-
-
+This project is about analyzing data regarding disaster reponse from Figure Eight. It uses natural language processing libary to classify messages based on historical data. The messages are from different resources. The webpage of the project gather the input of user message, then display the category of message it supposes to be in.
 
 
 # Instruction:
