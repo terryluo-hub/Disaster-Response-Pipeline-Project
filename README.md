@@ -3,14 +3,8 @@
 # Table of Contents:
 
 1. [Installation](#installation)
-2. [Summary] (#summary)
-3. [Instruction] (#instruction)
-
-
-
-
-
-
+2. [Summary](#summary)
+3. [Instruction](#instruction)
 
 
 # Installation:
