@@ -1,8 +1,23 @@
 # Disaster Response Pipeline Project
 
+# Table of Contents:
+
+1. Installation
+2. Summary
+3. Instruction
+
+
+#Installation:
+
+
+
+#Summary:
+
 This project is about analyzing the the message for disaster reponse.
 
-### Instructions:
+
+#Instruction:
+
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
@@ -14,3 +29,6 @@ This project is about analyzing the the message for disaster reponse.
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+
+
